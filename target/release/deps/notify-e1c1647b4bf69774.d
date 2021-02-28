@@ -1,0 +1,12 @@
+/www/mdbook/mdBook/target/release/deps/notify-e1c1647b4bf69774.rmeta: /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs
+
+/www/mdbook/mdBook/target/release/deps/libnotify-e1c1647b4bf69774.rlib: /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs
+
+/www/mdbook/mdBook/target/release/deps/notify-e1c1647b4bf69774.d: /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs /Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs
+
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs:
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs:
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs:
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs:
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs:
+/Users/creamlin/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs:

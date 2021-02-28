@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/www/mdbook/mdBook/target/release/build/typenum-12dff27408e619d9/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/www/mdbook/mdBook/target/release/build/typenum-12dff27408e619d9/out/op.rs

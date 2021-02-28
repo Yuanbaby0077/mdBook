@@ -1,0 +1,1 @@
+{"rustc":17138091804324965747,"features":"[]","target":13760102371391512126,"profile":10803726696109476711,"path":6835658098349854079,"deps":[[10110362666287168526,"ucd_trie",false,9540400148134290311]],"local":[{"CheckDepInfo":{"dep_info":"release/.fingerprint/pest-5d3be93bed08a923/dep-lib-pest"}}],"rustflags":[],"metadata":13683979381061451816,"config":0}
