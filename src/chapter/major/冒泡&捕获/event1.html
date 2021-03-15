@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Event Propagation</title>
+
+<style>
+#t-daddy { border: 1px solid red }
+#c1 { background-color: pink; }
+</style>
+
+<script>
+function stopEvent(ev) {
+  c2 = document.getElementById("c2");
+  c2.innerHTML = "hello";
+
+  // this ought to keep t-daddy from getting the click.
+  // ev.stopPropagation(); // 链接仍然会跳转
+  ev.preventDefault(); // 链接不跳转
+  alert("event propagation halted.");
+}
+
+function bannedEvent(e) {
+  alert('你被拉入黑名单了')
+  if (true) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+}
+// 一个历史⻚面,上面有若干按钮等点击逻辑,每个按钮都有自己的click事 件。
+// 现在新需求来了, 突然给每一个访问用户添加了banned这个属性, 如果为true, 则代表此用 户被封禁了。被封禁用户不可操作⻚面上的任何内容, 
+// 点击⻚面内的任何一处, 都弹窗提示您已 被封禁
+function load() {
+  elem = document.getElementById("tbl1");
+  elem.addEventListener("click", stopEvent, false);
+  window.addEventListener('click', bannedEvent, true)
+}
+</script>
+</head>
+
+<body onload="load();">
+
+<table id="t-daddy" onclick="alert('hi');">
+  <tr id="tbl1">
+    <td id="c1">
+      one
+      <a href="www.baidu.com">百度</a>
+    </td>
+  </tr>
+  <tr>
+    <td id="c2">two</td>
+  </tr>
+  <tr>
+    <td>
+      <a href="www.baidu.com">百度</a>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

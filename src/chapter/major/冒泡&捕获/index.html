@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; border: 1px solid" id="div1">
+      <div id="div2" style="padding: 25px; border: 1px solid">
+        <div id="div3" style="padding: 10px; background-color: aquamarine;">
+          
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+  const d1 = document.getElementById('div1')
+  const d2 = document.getElementById('div2')
+  const d3 = document.getElementById('div3')
+  d1.addEventListener('click', () => {
+    console.log('d1')
+  }, false)
+  d2.addEventListener('click', () => {
+    console.log('d2')
+  }, false)
+  d3.addEventListener('click', () => {
+    console.log('d3')
+  }, false)
+
+  d1.addEventListener('click', () => {
+    console.log('d1')
+  }, true)
+  d2.addEventListener('click', () => {
+    console.log('d2')
+  }, true)
+  d3.addEventListener('click', () => {
+    console.log('d3')
+  }, true)
+
+  // d1.addEventListener('click', () => {
+  //   console.log('d1')
+  // }, false)
+  // d2.addEventListener('click', () => {
+  //   console.log('d2')
+  // }, true)
+  // d3.addEventListener('click', () => {
+  //   console.log('d3')
+  // }, true)
+</script>
+</html>
