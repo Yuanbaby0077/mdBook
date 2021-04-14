@@ -131,3 +131,4 @@ module.exports = {
 
 参见[environment](https://webpack.js.org/configuration/output/#outputenvironment)
 
+参见[coreJS](https://github.com/zloirock/core-js)
