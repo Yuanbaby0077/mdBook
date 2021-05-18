@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 拓展函数的方法
+    function fn() {
+      console.log('调用原来的功能')
+    }
+
+    const _fn = fn
+
+    fn = function() {
+      _fn()
+      console.log('拓展的功能')
+    }
+
+    fn()
+
+    // 拓展数组的push/pop方法
+    // arr = []  arr => Array.prototype => Object.prototype =>....
+    // 如果浏览器支持__proto__ 的情况下 直接修改arr的原型
+    // 如果不支持__proto__，使用混入发，直接放到对象下
+    // 数组响应式缺陷 在vue3.0使用proxy处理 vue2.0有替代方案 
+    const arrayProto = Object.create(Array.prototype)
+    const ARRAY_METHODS = [
+      'push',
+      'pop',
+      'shift',
+      'unshift',
+      'splice',
+      'sort',
+      'reverse'
+    ]
+    ARRAY_METHODS.forEach((method) => {
+      arrayProto[method] = function() {
+        console.log('调用的是拦截的', method)
+        const res = Array.prototype[method].apply(this, Array.prototype.slice.call(arguments))
+        return res
+      }
+    })
+
+    const arr = []
+    arr.__proto__ = arrayProto
+
+  </script>
+</body>
+</html>

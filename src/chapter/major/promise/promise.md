@@ -102,5 +102,11 @@ promise.all 如何防止某一个promise失败从而使整个promise 失败
 
 then 方法中的返回结果是一样的
 
-## promise 封装技巧
+## 20210516 promise 学习
+
+创建Promise实例，必须传入回调函数
+
+`new Promise() // Promise resolver undefined is not a function`
+
+
 

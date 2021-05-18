@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="https://www.baidu.com/img/flexible/logo/pc/result@2.png" alt="">
+  <button onclick="handleClick()">click</button>
+  <button id="btn1">点击</button>
+  <script>
+    window.addEventListener('error', function(event) {
+      console.log(event)
+    })
+
+    function getImageUrl() {
+      try {
+        const imgs = document.getElementsByTagName('img')
+        for(let i = 0; i < l; i++) {
+          console.log(imgs[i].getAttribute('src'))
+        }
+      } catch(e) {
+        console.log(e)
+      }
+      
+    }
+    getImageUrl()
+    console.log('test')
+    function handleClick() {
+      console.log('click')
+    }
+
+    try {
+      const btn = document.getElementById('btn1')
+      btn.onclick = function() {
+        let i = k
+        console.log(i)
+      }
+    } catch(e) {
+      console.log('这里捕获一个异常', e) // 没有输出
+    }
+    
+  </script>
+</body>
+</html>

@@ -48,9 +48,20 @@ class MyPromise {
 
   then = (onFulfilled, onRejected) => {
     const promise2 = new MyPromise((resolve, reject) => {
+      
+      onFulfilled = typeof onFulfilled === 'function'
+        ? onFulfilled
+        : value => value
+      onRejected = typeof onRejected === 'function'
+        ? onRejected
+        : reason => {
+          throw reason
+        }
+      console.log('this.statua', this.status)
       if (this.status === FULFILLED) {
         queueMicrotask(() => {
           try {
+            console.log('this.value', this.value)
             const res = onFulfilled(this.value)
             resolvePromise(promise2, res, resolve, reject)
           } catch(e) {
@@ -60,7 +71,12 @@ class MyPromise {
       }
   
       if (this.status === REJECTED) {
-        onRejected(this.reason)
+        console.log('error', this.status)
+        try {
+          onRejected(this.reason)
+        } catch(e) {
+          console.log('ot')
+        }
       }
   
       if (this.status === PENDING) {
@@ -71,6 +87,17 @@ class MyPromise {
       }
     })
     return promise2
+  }
+
+  static resolve = (param) => {
+    if (param instanceof MyPromise) return param
+    return new MyPromise((resolve, reject) => {
+      resolve(param)
+    })
+  }
+
+  static reject = param => {
+    
   }
 }
 
@@ -177,19 +204,43 @@ const promise = new MyPromise((resolve, reject) => {
   resolve('success')
 })
 
-const p1 = promise.then(value => {
-  throw new Error('then这里有个异常')
-}, (reason) => {
-  console.log('error', reason)
-}).then(() => {
-  console.log('then==========')
-}, (error) => {
-  console.log('捕获异常', error)
+// const p1 = promise.then(value => {
+//   throw new Error('then这里有个异常')
+// }, (reason) => {
+//   console.log('error', reason)
+// }).then(() => {
+//   console.log('then==========')
+// }, (error) => {
+//   console.log(error)
+// })
+// .then(() => {
+//   console.log('zhengchang ')
+// })
+
+// then 中的参数可选
+const p2 = promise
+.then()
+.then()
+.then((val) => {
+  console.log(val, 'zhengchang ')
 })
-.then(() => {
-  console.log('zhengchang ')
-})
-console.log('================')
+
+
+// resolve reject静态调用
+
+MyPromise.resolve(6)
+  .then((val) => {
+    console.log(val)
+  })
+
+MyPromise.resolve(new MyPromise((resolve) => {
+  resolve(7)
+}))
+  .then((val) => {
+    console.log(val)
+  })
+
+// console.log('================')
 // const promise1 = new Promise((resolve, reject) => {
 //   resolve(100)
 // })
@@ -198,6 +249,9 @@ console.log('================')
 //   return p2
 // })
 // console.log('================')
+
+// promiseA+规范中then方法抛出异常，第二个then方法捕获之后不会影响后续的then方法的链式调用
+// 如果没有下一个then方法来捕获，则，抛出 (node:32626) UnhandledPromiseRejectionWarning: Error: error 程序中止
 
 // const p3 = new Promise((resolve, reject) => {
 //   resolve(1)
@@ -229,4 +283,23 @@ console.log('================')
 // })
 // .then((value) => {
 //   console.log(value)
+// })
+
+// then方法的参数是可选的
+
+// const p3 = new Promise((resolve, reject) => {
+//   resolve(1)
+// })
+// .then(4)
+// .then()
+// .then((value) => {
+//   console.log(value) // 返回 1
+//   return Promise.resolve(4)
+// })
+// .then((value) => {
+//   console.log(value) // 返回 4
+//   return () => {
+//     console.log('555')
+//     return 5
+//   }
 // })
