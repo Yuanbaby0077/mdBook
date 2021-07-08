@@ -36,25 +36,31 @@ function load() {
 }
 </script>
 </head>
-
-<body onload="load();">
-
-<table id="t-daddy" onclick="alert('hi');">
-  <tr id="tbl1">
-    <td id="c1">
-      one
-      <a href="www.baidu.com">百度</a>
-    </td>
-  </tr>
-  <tr>
-    <td id="c2">two</td>
-  </tr>
-  <tr>
-    <td>
-      <a href="www.baidu.com">百度</a>
-    </td>
-  </tr>
-</table>
-
+<body>
+  <div id="one">
+    <div id="two">
+      <div id="three">click</div>
+    </div>
+  </div>
+  <script>
+    var el1 = document.getElementById('one')
+    el1.addEventListener('click', () => {
+      console.log('catch one')
+    }, true)
+    el1.addEventListener('click', () => {
+      console.log('bubble one')
+    }, false)
+    var el2 = document.getElementById('two')
+    el2.addEventListener('click', () => {
+      console.log('catch two')
+    }, true)
+    el2.addEventListener('click', () => {
+      console.log('bubble two')
+    }, false)
+    var el3 = document.getElementById('three')
+    el3.addEventListener('click', () => {
+      console.log('three')
+    }, true)
+  </script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+  
+  <!-- <script src="./mustache.js"></script> -->
+  <script src="./2021-06-24LRU.js"></script>
+  <script id="myMustacheTemplate" type="text/template">
+    <div>
+      {{#users}}
+      <div>
+        <p>{{ name }}</p>
+        <p>{{ age }}</p>
+        <ul>
+          {{#hobbies}}
+            <li>{{name}}</li>
+          {{/hobbies}}
+        </ul>
+      </div>
+      {{/users}}
+    </div>
+  </script>
+  <script>
+    
+    var data = {
+      users: [
+        {
+          name: 'zs',
+          age: 23,
+          hobbies: ['ball', 'running']
+        }, {
+          name: 'ls',
+          age: 34,
+          hobbies: ['swimming', 'reading']
+        }
+      ]
+    }
+    var dom = document.getElementById('container')
+    var temp = document.getElementById('myMustacheTemplate').innerHTML
+    console.log(temp)
+    dom.innerHTML = Mustache.render(temp, data)
+
+  </script>
+  <script type="module">
+    import {addTextToBody} from './2021-06-10.mjs';
+    addTextToBody('addTextToBody')
+  </script>
+  
+</body>
+</html>

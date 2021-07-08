@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function callbackFn() {
+      console.log('执行时间是：', new Date())
+    }
+    // 节流 每隔指定时间段有且执行一次
+    function throttle(fn, delay) {
+      let timerId = null
+      const ctx = this
+      console.log('throttle', timerId)
+      return function() {
+        console.log(timerId)
+        if (!timerId) { // 定时器编号为null,执行节流函数
+          fn.call(ctx)
+          timerId = setTimeout(function() { // 设置定时器，获得timerId，该时间段内，触发事件，不执行fn，直到delay时间后，清空定时器，timer置空
+            clearTimeout(timerId)
+            timerId = null
+          }, delay)
+        }
+      }
+    }
+    // 去抖 延迟时间内重复发生该事件，清空定时器，重新计时，该时间段内没有重新触发事件则执行。
+    // 立即执行
+    function debounce(fn, delay) {
+      let timerId = null
+      const ctx = this
+      console.log('debounce', timerId)
+      return function() {
+        if (!timerId) { // timerID 初始化为空，此时，触发事件，立即窒息感回调
+          fn.call(ctx)
+        }
+        clearTimeout(timerId) // 此后，频繁触发事件，就清空定时器，
+        timerId = setTimeout(function() { // 只保留最后一个，停止resize后，delay时间后触发fn
+          fn.call(ctx)
+        }, delay)
+      }
+    }
+
+    // window.addEventListener('resize', debounce(callbackFn, 1000))
+    window.addEventListener('resize', throttle(callbackFn, 2000))
+  </script>
+</body>
+</html>
+
+
+

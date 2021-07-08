@@ -12,17 +12,19 @@
 </html>
 <script>
 
-  function debounce(fn, interval) {
+  function handler() {
+    console.log('resize timer', Date.now())
+  }
+
+  function _debounce(fn, delay) {
+    const that = this
     let timer = null
     return function() {
       clearTimeout(timer)
-      timer = setTimeout(() => {
-        fn.apply(this, arguments)
-      }, interval)
+      timer = setTimeout(function() {
+        fn.apply(that, arguments)
+      }, delay)
     }
   }
-
-  window.addEventListener('resize', debounce(() => {
-    console.log('resize timer', new Date())
-  }, 2000))
+  window.addEventListener('resize', _debounce(handler, 1000))
 </script>

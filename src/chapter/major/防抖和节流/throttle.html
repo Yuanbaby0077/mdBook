@@ -11,59 +11,38 @@
 </body>
 </html>
 <script>
-  // window.addEventListener('resize', throttle(() => {
-  //   console.log('resize', new Date())
-  // }, 1000))
-  // 使用时间戳 第一次立即执行
-  function throttle(fn, interval) {
-    let last = 0
+  function handlerResize() {
+    console.log('执行resize', Date.now())
+  }
+
+  function _throttle(fn, delay) {
+    let last = null
     return function() {
-      let now = Date.now()
-      if (now - last >= interval) {
-        last = now
+      const date = Date.now()
+      if (date - last >= delay) {
         fn.apply(this, arguments)
+        last = date
+      } else {
+        console.log('时间不满足要求')
       }
     }
   }
 
-  // 使用定时器 第一次不立即执行 
-  function throttleTimer(fn, interval) {
+  // 第一次不延迟
+  // 设置定时器 定时清理
+  function timerThrottle(fn, delay) {
     let timer = null
     return function() {
-      const ctx = this
       if (!timer) {
-        timer = setTimeout(() => {
-          fn.apply(ctx, arguments)
+        fn.apply(this, arguments)
+        timer = setTimeout(function() {
+          console.log(Date.now())
           clearTimeout(timer)
           timer = null
-        }, interval)
+        }, delay)
       }
     }
   }
 
-  // 时间戳和定时器结合 最后一次尽量不延迟
-  function throttleOptimize(fn, interval) {
-    let timer = null
-    let startTime = Date.now()
-
-    return function() {
-      const ctx = this
-      const curTime = Date.now()
-      const remainTime = interval - (curTime - startTime)
-      console.log(curTime, startTime, remainTime)
-      clearTimeout(timer)
-      if (remainTime <= 0) {
-        fn.apply(ctx, arguments)
-        startTime = Date.now()
-      } else {
-        timer = setTimeout(function() {
-          fn.apply(ctx, arguments)
-        }, remainTime)
-      }
-    }
-  }
-
-  window.addEventListener('resize', throttleOptimize(() => {
-    console.log('resize timer', new Date())
-  }, 2000))
+  window.addEventListener('resize', timerThrottle(handlerResize, 2000))
 </script>
