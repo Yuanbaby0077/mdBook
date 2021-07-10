@@ -28,6 +28,19 @@
         }
       }
     }
+
+    // 时间戳 处理 节流
+    function _throttle(fn, delay) {
+      let lastDate = new Date()
+      const ctx = this
+      return function() {
+        let curDate = new Date()
+        if (curDate - lastDate >= delay) {
+          lastDate = curDate
+          fn.call(ctx)
+        }
+      }
+    }
     // 去抖 延迟时间内重复发生该事件，清空定时器，重新计时，该时间段内没有重新触发事件则执行。
     // 立即执行
     function debounce(fn, delay) {
@@ -46,7 +59,7 @@
     }
 
     // window.addEventListener('resize', debounce(callbackFn, 1000))
-    window.addEventListener('resize', throttle(callbackFn, 2000))
+    window.addEventListener('resize', _throttle(callbackFn, 2000))
   </script>
 </body>
 </html>
