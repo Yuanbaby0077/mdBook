@@ -87,11 +87,11 @@ console.log(dyForGrid(4, 4))
 function dyForFrog(arr) {
   let res = []
   res[0] = true
-  for (let j = 1; j < arr.length; j++) {
-    res[j] = false
-    for (let i = 0; i < arr.length; i++) {
-      if (res[i] && arr[i] + i >= j) {
-        res[j] = true
+  for (let n = 1; n < arr.length; n++) {
+    res[n] = false
+    for (let i = 0; i < n; i++) {
+      if (res[i] && arr[i] + i >= n) {
+        res[n] = true
         break
       }
     }
@@ -100,4 +100,4 @@ function dyForFrog(arr) {
   return res[arr.length - 1]
 }
 
-console.log(dyForFrog([3,2,1,0,4]))
+console.log(dyForFrog([3,2,1,3,4,6,7]))
