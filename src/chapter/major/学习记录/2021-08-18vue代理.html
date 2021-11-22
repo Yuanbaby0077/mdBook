@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+  <script>
+    var arr = [1,2,4]
+    arr.forEach((a, index) => {
+      Object.defineProperty(arr, index, {
+        get() {
+          console.log('getter')
+          return a
+        },
+        set(value) {
+          console.log('setter 写数组被拦截')
+          a = value
+        }
+      })
+    })
+    arr[1] = 4
+    console.log(arr[1])
+    arr.push(5)
+  </script>
+</body>
+</html>
+

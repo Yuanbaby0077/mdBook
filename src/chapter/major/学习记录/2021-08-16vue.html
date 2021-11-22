@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <input v-model="message"/>
+    <base-info></base-info>
+  </div>
+  <script>
+    const BaseInfo = {
+      name: 'baseInfo',
+      data() {
+        return {
+          name: 'zs'
+        }
+      },
+      mounted() {
+        console.log('this', this.$el)
+      },
+      template: `<div>{{name}}</div>`
+    }
+    const vm = new Vue({
+      name: 'app',
+      data: {
+        message: 'hellow'
+      },
+      components: {
+        BaseInfo
+      },
+      mounted() {
+        this.$data.message = 444
+        console.log(this.$data, this === vm)
+      },
+      methods: {
+        
+      }
+    })
+    vm.$mount('#app')
+    console.log(vm)
+    // 指定时间内 只能执行一次
+    // 第一次 立马执行
+    function _throttle(ctx, fn, delay) {
+      let lastTime = +new Date
+      return function() {
+        let curTime = + new Date
+        if (curTime - lastTime >= delay) {
+          fn.call(ctx)
+          lastTime = curTime
+        }
+      }
+    }
+
+    // 指定时间内触发事件，清空定时器，重新计时
+    function _debounce(ctx, fn, delay) {
+      let timer = null
+      return function() {
+        if (!timer) {
+          fn.call(ctx)
+        }
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.call(ctx)
+        }, delay)
+      }
+    }
+
+    function handleResize() {
+      console.log(+new Date)
+    }
+    window.addEventListener('resize', _debounce(null, handleResize, 1000))
+  </script>
+  <script>
+    function _vue(options) {
+      this._init()
+    }
+    _vue.options = {}
+    _vue.options.components = {}
+    _initMixin(_vue)
+    function _initMixin(vue) {
+      _vue.prototype._init = function() {
+        const vm = this
+        console.log(vm.constructor.options)
+s      }
+    }
+
+    var b = new _vue()
+    console.log(b)
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="animate" style="width:20px;height: 20px; background-color:aqua"></div>
+  <script>
+    const element = document.getElementById('animate');
+    let start;
+
+    function internalTimer(interval) {
+      return function(elapsed) {
+        if (elapsed < interval) return true
+        return false
+      }
+    }
+
+    function step(timestamp) {
+      if (start === undefined)
+        start = timestamp;
+      
+      const elapsed = timestamp - start;
+
+      //这里使用`Math.min()`确保元素刚好停在200px的位置。
+      element.style.transform = 'translateX(' + 0.1 * elapsed + 'px)';
+      const isTimer = internalTimer(6000)
+      if (isTimer(elapsed)) { // 在两秒后停止动画
+        window.requestAnimationFrame(step);
+      }
+    }
+    window.requestAnimationFrame(step);
+  </script>
+</body>
+</html>

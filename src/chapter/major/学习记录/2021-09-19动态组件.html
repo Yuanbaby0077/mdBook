@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="handleClick('child1')">child1
+      
+    </button>
+    <button @click="handleClick('child2')">child2</button>
+    <button @click="handleClick('child3')">child3</button>
+    
+    <keep-alive>
+      <component :is='activeTab' inline-template>
+        <span>{{ name }}</span>
+      </component>
+    </keep-alive>
+  </div>
+  <script>
+    var child4 = {
+      template: '<div>child4</div>',
+      mounted() {
+        console.log('child4')
+      },
+    }
+    var child1 = {
+      data() {
+        return {
+          name: '22'
+        }
+      },
+      template: '<div>第一个 child1<child4></child4></div>',
+      components: {
+        child4
+      },
+      mounted() {
+        console.log('child1')
+      },
+    }
+    var child2 = {
+      data() {
+        return {
+          name: '33'
+        }
+      },
+      template: '<div>第二个 child2</div>'
+    }
+    var child3 = {
+      data() {
+        return {
+          name: '44'
+        }
+      },
+      template: '<div>第三个 child3</div>'
+    }
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        activeTab: 'child1'
+      },
+      components: {
+        child1,
+        child2,
+        child3
+      },
+      mounted() {
+        console.log('app')
+      },
+      methods: {
+        handleClick(val) {
+          this.activeTab = val
+        }
+      },
+    })
+    // vm.$mount('#app')
+  </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <div id="app">
+    <input v-if="show" type="text" ref="myInput">
+    <part-info ref="partInfo"></part-info>
+  </div>
+</head>
+<body>
+  <script>
+    // 全局注册
+    Vue.component('global-info', {
+      // name: 'baseInfo',
+      data() {
+        return {
+          name: '全局组件'
+        }
+      },
+      template: '<div>{{name}}</div>'
+    })
+
+    const partInfo = {
+      name: 'part-component',
+      props: {
+        firstName: {
+          type: String
+        }
+      },
+      data() {
+        return {
+          user: {
+            base: {
+              name: 'test'
+            }
+          }
+        }
+      },
+      mounted() {
+      },
+      methods: {
+        
+      },
+      template: '<div>{{user.base.name}}{{firstName}}</div>'
+    }
+    var vm = new Vue({
+      // el: "#app",
+      components: { // 局部组件注册
+        partInfo
+      },
+      data: {
+        array: [1,2,3],
+        name: 'zs',
+        show: false
+      },
+      mounted() {
+        this.show = true;
+        console.log('this.$refs.myInput', this.$refs.myInput)
+        this.$nextTick(() => {
+          this.$refs.myInput.focus();// 报错
+        })
+
+        this.$nextTick().then(() => {
+          console.log('no callback')
+        })
+        // this.$refs.myInput.focus();// this.$refs.myInput undefined
+        // Promise.resolve(2).then((res) => {console.log('promise', res)
+        // console.log('this.$refs.partInfo', this.$refs.partInfo)})
+        // this.$nextTick(() => {
+        //   console.log('this.$refs.partInfo', this.$refs.partInfo)
+        // })
+        
+        // document.getElementById('app').style.color = '#f0f0f0'
+        console.log(this.array)
+        this.getName()
+        // this.$mount()
+        console.log(this)
+      },
+      methods: {
+        getName() {
+          console.log(this.getName)
+        },
+        // $mount() {
+        //   console.log('$mount')
+        // }
+      },
+      // template: '<div>{{name}}<global-info></global-info><part-info firstName="abc"></part-info></div>'
+    })
+    vm.$mount('#app')
+    console.log(vm, Vue.options)
+  </script>
+  <!-- <script type="module">
+    import proxyObj2 from './2021-08-24proxy'
+    console.log(proxyObj2)
+  </script> -->
+</body>
+</html>

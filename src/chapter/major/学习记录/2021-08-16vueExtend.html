@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    {{test}}
+    {{test2}}
+    {{test3}}
+    <base-info name="ls"></base-info>
+    <!-- <base-info name="wu"></base-info> -->
+    <!-- <sub-base-info></sub-base-info> -->
+    <!-- <input v-model="message"/> -->
+  </div>
+  <script>
+    var Parent = Vue.extend(
+      {
+        name: 'parent',
+        mounted() {
+          console.log('mounted 111111')
+        },
+        watch: {
+          test: {
+            handler(val) {
+              console.log('parent watch', val)
+            },
+            immediate: true
+          }
+        },
+        data() {
+          return  {
+            test: 1,
+            test2: 2,
+            target: {
+              baseInfo: {
+                name: 'zs',
+                age: 23
+              },
+              arr: [12,13]
+            }
+          }
+        }
+      }
+    )
+    const SubBaseInfo = {
+      name: 'sub-baseInfo',
+      data() {
+
+      },
+      mounted() {
+        console.log('mounted, sub baseinfo')
+      },
+      
+    }
+    const BaseInfo = {
+      name: 'baseInfo',
+      // When we defined the <button-counter> component, 
+      // you may have noticed that data wasn’t directly provided an object
+      // Instead, a component’s data option must be a function, 
+      // so that each instance can maintain an independent copy of the returned data object:
+      data() {
+        return {
+          name: 'zs',
+          age: 23
+        } 
+      },
+      components: {
+        SubBaseInfo
+      },
+      mounted() {
+        console.log('mounted baseInfo')
+        this.age = 28
+        console.log(this)
+      },
+      watch: {
+        name: {
+          handler(val) {
+            console.log('watch', val)
+          },
+          immediate: true
+        }
+      },
+      methods: {
+        changeName() {
+          this.name = 'zl'
+        }
+      },
+      template: `<div>{{name}}:{{age}}<button @click="changeName">改名</button><sub-base-info></sub-base-info></div>`
+    }
+    var Sub = Parent.extend(
+      {
+        name: 'child',
+        data() {
+          return {
+            test: 3,
+            test3: 4,
+            target: {
+              baseInfo: {
+                name: 'zs'
+              },
+              arr: [12,13,15]
+            }
+          }
+        },
+        watch: {
+          test: {
+            handler(val) {
+              console.log('watch', val)
+            },
+            immediate: true
+          }
+        },
+        components: {
+          BaseInfo,
+          SubBaseInfo
+        },
+        mounted() {
+          console.log('mounted parent')
+          console.log(this.$el)
+        },
+      }
+    )
+    var vm = new Sub()
+    vm.$mount('#app')
+    console.log(vm)
+  </script>
+</body>
+</html>
+

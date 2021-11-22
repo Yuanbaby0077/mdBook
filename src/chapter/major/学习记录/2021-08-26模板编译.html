@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+  <div id="app">
+    =======
+    <div id="test">
+      <div>
+        baseInfo={{baseInfo}}
+      </div>
+    </div>
+  </div>
+</head>
+<body>
+  <script>
+    var MyComponent = new Vue({
+      // template: document.querySelector('#test'),
+      // template: '<div>test</div>',
+      data() {
+        return {
+          users: [
+            {
+              name: 'zs'
+            },
+            {
+              name: 'ls'
+            }
+          ],
+          baseInfo: '444',
+          $name: '333',
+          // _firstName: 'zs',
+          $lastName: 'ls',
+
+        }
+      },
+      render(h) {
+        return h('div', {key: 2}, this.users.map(
+          i => h('div', i.name)
+        ))
+      },
+      mounted() {
+        console.log('name' in this)
+        // this.$set(this, '_test', 'test')
+      },
+    })
+
+    // create and mount to #app (will replace #app)
+    MyComponent.$mount('#app')
+
+    // 过滤_和$开头的变量
+    function isReserved (str) {
+      var c = (str + '').charCodeAt(0);
+      return c === 0x24 || c === 0x5F
+    }
+  </script>
+</body>
+<style>
+  .item {
+    height: 30px;
+    width: 50px;
+    background-color: antiquewhite;
+  }
+</style>
+</html>

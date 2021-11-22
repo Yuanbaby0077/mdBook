@@ -101,3 +101,30 @@ function dyForFrog(arr) {
 }
 
 console.log(dyForFrog([3,2,1,3,4,6,7]))
+
+
+// 最长递增子序列
+
+function dyLongestSeq(arr) {
+  const dp = []
+  for(let i = 0; i < arr.length; i++) {
+    dp[i] = 1
+    for(let j = 0; j < i; j++) {
+      if (arr[i] > arr[j]) {
+        dp[i] = Math.max(dp[j] + 1, dp[i])
+      }
+    }
+  }
+  console.log(dp)
+  return Math.max.apply(null, dp)
+}
+
+// 最大子数组: 子数组是连续的。
+function dyMaxArray(arr) {
+  const dp = []
+  dp[0] = arr[0]
+  for (let i = 1; i < arr.length; i++) {
+    dp[i] = Math.max(dp[i - 1] + arr[i], arr[i])
+  }
+  return dp
+}

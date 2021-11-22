@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <button @click="changeTab('child1')">显示child1</button>
+    <button @click="changeTab('child2')">显示child2</button>
+    <button @click="changeTab('child3')">显示child3</button>
+    <keep-alive  :include="['child_2']">
+      <component :is="activeTab"></component>
+    </keep-alive>
+  </div>
+  <script>
+    var child3 = {
+      name: 'child_3',
+      template: '<div>child3</div>',
+      data() {
+        return {
+          num: 3
+        }
+      },
+      mounted() {
+        console.log('child3 mounted')
+      },
+      // deactivated() {
+      //     console.log('child3 deactivated')
+      // }
+    }
+    var child1 = {
+      name: 'child_1',
+      template: '<div class="child1" @click="add">child1 计数是：<i>{{num}}</i><child3></child3></div>',
+      data() {
+        return {
+          num: 1
+        }
+      },
+      mounted() {
+        console.log('child1 mounted')
+      },
+      // activated() {
+      //     console.log('child1 activated')
+      // },
+      // deactivated() {
+      //     console.log('child1 deactivated')
+      // },
+      // destoryed() {
+      //   console.log('child1 destroyed')
+      // },
+      components: {
+        child3
+      },
+      methods: {
+        add() {
+          ++this.num
+        }
+      },
+    }
+    var child2 = {
+      name: 'child_2',
+      template: '<div>child2</div>',
+      data() {
+        return {
+          num: 2
+        }
+      },
+      mounted() {
+        console.log('child2 mounted')
+      },
+      // activated() {
+      //     console.log('child2 activated')
+      // },
+      // deactivated() {
+      //     console.log('child2 deactivated')
+      // },
+      // destoryed() {
+      //   console.log('child2 destroyed')
+      // }
+    }
+
+    
+
+    const app = new Vue({
+      el: '#app',
+      name: 'app',
+      components: {
+        child1,
+        child2,
+        child3
+      },
+      data() {
+        return {
+          activeTab: 'child1'
+        }
+      },
+      methods: {
+        changeTab(val) {
+          this.activeTab = val
+        }
+      }
+    })
+  </script>
+</body>
+</html>
+

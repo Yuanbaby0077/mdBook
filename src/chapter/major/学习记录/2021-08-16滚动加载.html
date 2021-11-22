@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 指定时间内 只能执行一次
+    // 第一次 立马执行
+    function _throttle(ctx, fn, delay) {
+      let lastTime = +new Date
+      return function() {
+        let curTime = + new Date
+        if (curTime - lastTime >= delay) {
+          fn.call(ctx)
+          lastTime = curTime
+        }
+      }
+    }
+
+    // 指定时间内触发事件，清空定时器，重新计时
+    function _debounce(ctx, fn, delay) {
+      let timer = null
+      return function() {
+        if (!timer) {
+          fn.call(ctx)
+        }
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          fn.call(ctx)
+        }, delay)
+      }
+    }
+
+    function handleResize() {
+      console.log(+new Date)
+    }
+    window.addEventListener('resize', _debounce(null, handleResize, 1000))
+  </script>
+</body>
+</html>
+
